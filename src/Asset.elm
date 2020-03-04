@@ -1,51 +1,40 @@
-module Asset exposing (linkedIn, elm, logo, octocat, src)
+module Asset exposing (linkedIn, elm, logo, octocat)
 
 
 
 -- Asset
--- Theses are things to include on the page.
+-- These are things to include on the page.
 
 
-import Html
-import Html.Styled exposing (Attribute, Html)
-import Html.Styled.Attributes as Attr
-
-
-type Image
-    = Image String
+website : String
+website =
+  "https://noahmcgivern.com"
 
 
 
 -- IMAGES
 
 
-linkedIn : Image
-linkedIn =
-    image "linkedIn.png"
-
-elm : Image
-elm =
-    image "elm.png"
-
-logo : Image
-logo =
-    image "logo.png"
-
-
-octocat : Image
-octocat =
-    image "octocat.png"
-
-
-image : String -> Image
+image : String -> String
 image filename =
-    Image ("/assets/" ++ filename)
+  website ++ "/assets/" ++ filename
 
 
+linkedIn : String
+linkedIn =
+  image "linkedIn.png"
 
--- USING IMAGES
+
+elm : String
+elm =
+  image "elm.png"
 
 
-src : Image -> Attribute msg
-src (Image url) =
-    Attr.src url
+logo : String
+logo =
+  image "logo.png"
+
+
+octocat : String
+octocat =
+  image "octocat.png"

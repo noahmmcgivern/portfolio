@@ -21,10 +21,10 @@ import Html.Styled.Attributes as Attr exposing (css, href, src)
 main : Program () Model Msg
 main =
   Browser.sandbox
-        { view = view >> toUnstyled
-        , update = update
-        , init = init
-        }
+    { view = view >> toUnstyled
+    , update = update
+    , init = init
+    }
 
 
 
@@ -47,7 +47,9 @@ image float =
 
 background : List Style
 background =
-  [ backgroundColor theme.primary ]
+  [ backgroundColor theme.primary
+  , minHeight (px 1200)
+  ]
 
 
 container : List Style
@@ -95,26 +97,26 @@ view : Model -> Html Msg
 view model =
   div [ css background ]
     [ a [ Attr.href "#" ]
-        [ img [ Asset.src Asset.logo
+        [ img [ Attr.src Asset.logo
               , css (image 600)
               ] [] ]
     , div [ css [ height (px 100) ] ] []
     , div [ css container ]
         [ div [ css element ]
             [ a [ Attr.href "https://www.linkedin.com/in/noah-mcgivern/" ]
-                [ img [ Asset.src Asset.linkedIn
+                [ img [ Attr.src Asset.linkedIn
                       , css (image 300)
                       ] [] ]
             ]
         , div [ css element ]
             [ a [ Attr.href "https://elm-lang.org/" ]
-                [ img [ Asset.src Asset.elm
+                [ img [ Attr.src Asset.elm
                       , css (image 300)
                       ] [] ]
             ]
         , div [ css element ]
             [ a [ Attr.href "https://github.com/noahmmcgivern" ]
-                [ img [ Asset.src Asset.octocat
+                [ img [ Attr.src Asset.octocat
                       , css (image 300)
                       ] [] ]
             ]
