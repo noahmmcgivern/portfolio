@@ -1,5 +1,5 @@
 build:
-	elm make src/Main.elm
+	elm make src/Main.elm --output=main.js
 
-run:
+dev:
 	elm reactor

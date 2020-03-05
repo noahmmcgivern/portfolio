@@ -7,11 +7,17 @@ module Main exposing (..)
 
 
 import Asset
+import Bootstrap.Card.Block as Block
+import Bootstrap.Button as Button
+import Bootstrap.CDN as CDN
+import Bootstrap.Card as Card
+import Bootstrap.Grid as Grid
+import Bootstrap.Grid.Row as Row
+import Bootstrap.Grid.Col as Col
+import Bootstrap.Utilities.Spacing as Spacing
 import Browser
-import Css exposing (..)
-import Html
-import Html.Styled exposing (..)
-import Html.Styled.Attributes as Attr exposing (css, href, src)
+import Html exposing (..)
+import Html.Attributes as Attr
 
 
 
@@ -21,47 +27,10 @@ import Html.Styled.Attributes as Attr exposing (css, href, src)
 main : Program () Model Msg
 main =
   Browser.sandbox
-    { view = view >> toUnstyled
+    { view = view
     , update = update
     , init = init
     }
-
-
-
--- THEME
-
-
-theme : { primary : Color}
-theme =
-  { primary = hex "030723" }
-
-
-image : Float -> List Style
-image float =
-  [ display block
-  , height (px float)
-  , width (px float)
-  , margin auto
-  ]
-
-
-background : List Style
-background =
-  [ backgroundColor theme.primary
-  , minHeight (px 1200)
-  ]
-
-
-container : List Style
-container =
-  [ display Css.table
-  , width (pct 100)
-  ]
-
-
-element : List Style
-element =
-  [ display tableCell ]
 
 
 
@@ -93,33 +62,43 @@ update msg model =
 -- VIEW
 
 
+imageSrc : List (String, String)
+imageSrc =
+    [ ("https://www.linkedin.com/in/noah-mcgivern/", Asset.linkedIn)
+    , ("https://elm-lang.org/", Asset.elm)
+    , ("https://github.com/noahmmcgivern", Asset.octocat)
+    ]
+
+
+image : (String, String) -> Grid.Column msg
+image (link, asset) =
+  Grid.col [ Col.md4, Col.sm12 ]
+    [ a [ Attr.href link ]
+        [ img [ Attr.src asset, Attr.style "width" "100%" ] [] ]
+    ]
+
+
+logo : List (Grid.Column msg)
+logo =
+  [ Grid.col [ Col.md12 ]
+      [ a [ Attr.href "#" ]
+              [ img
+                  [ Attr.src Asset.logo
+                  , Attr.style "display" "block"
+                  , Attr.style "margin-left" "auto"
+                  , Attr.style "margin-right" "auto"
+                  , Attr.style "width" "600px"
+                  , Attr.style "maxWidth" "100%"
+                  ] []
+              ]
+      ]
+  ]
+
+
 view : Model -> Html Msg
 view model =
-  div [ css background ]
-    [ a [ Attr.href "#" ]
-        [ img [ Attr.src Asset.logo
-              , css (image 600)
-              ] [] ]
-    , div [ css [ height (px 100) ] ] []
-    , div [ css container ]
-        [ div [ css element ]
-            [ a [ Attr.href "https://www.linkedin.com/in/noah-mcgivern/" ]
-                [ img [ Attr.src Asset.linkedIn
-                      , css (image 300)
-                      ] [] ]
-            ]
-        , div [ css element ]
-            [ a [ Attr.href "https://elm-lang.org/" ]
-                [ img [ Attr.src Asset.elm
-                      , css (image 300)
-                      ] [] ]
-            ]
-        , div [ css element ]
-            [ a [ Attr.href "https://github.com/noahmmcgivern" ]
-                [ img [ Attr.src Asset.octocat
-                      , css (image 300)
-                      ] [] ]
-            ]
+    Grid.container []
+        [ CDN.stylesheet -- creates an inline style node with the Bootstrap CSS
+        , Grid.row [] <| logo
+        , Grid.row [] <| List.map image imageSrc
         ]
-    , div [ css [ height (px 200) ] ] []
-    ]
