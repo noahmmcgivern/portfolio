@@ -1,6 +1,4 @@
-module Asset exposing (linkedIn, elm, logo, octocat)
-
-
+module Asset exposing (elm, linkedIn, logo, octocat)
 
 -- Asset
 -- These are things to include on the page.
@@ -8,7 +6,7 @@ module Asset exposing (linkedIn, elm, logo, octocat)
 
 website : String
 website =
-  "https://noahmcgivern.com"
+    "https://noahmcgivern.com"
 
 
 
@@ -17,24 +15,24 @@ website =
 
 image : String -> String
 image filename =
-  website ++ "/assets/" ++ filename
+    website ++ "/assets/" ++ filename
 
 
 linkedIn : String
 linkedIn =
-  image "linkedIn.png"
+    image "linkedIn.png"
 
 
 elm : String
 elm =
-  image "elm.png"
+    image "elm.png"
 
 
 logo : String
 logo =
-  image "logo.png"
+    image "logo.png"
 
 
 octocat : String
 octocat =
-  image "octocat.png"
+    image "octocat.png"
