@@ -75,10 +75,10 @@ image ( link, asset ) =
             [ img
                 [ Attr.src asset
                 , Attr.style "display" "block"
-                , Attr.style "margin-bottom" "50px"
                 , Attr.style "margin-left" "auto"
                 , Attr.style "margin-right" "auto"
                 , Attr.style "width" "80%"
+                , Spacing.mb4
                 ]
                 []
             ]
