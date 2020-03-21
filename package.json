@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Thank you for taking the time to look at my GitHub repository.",
   "scripts": {
+    "format": "npx elm-format src/",
     "start": "npx elm reactor",
     "test": "rm -rf out && mkdir -p out && cp -r assets out && cp index.html out && npx elm make src/Main.elm --output=out/main.js"
   },

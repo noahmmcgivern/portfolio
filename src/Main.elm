@@ -1,16 +1,12 @@
-module Main exposing (..)
+module Main exposing (main)
 
 -- Noah McGivern
 --
 
 import Asset
-import Bootstrap.Button as Button
 import Bootstrap.CDN as CDN
-import Bootstrap.Card as Card
-import Bootstrap.Card.Block as Block
 import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
-import Bootstrap.Grid.Row as Row
 import Bootstrap.Utilities.Spacing as Spacing
 import Browser
 import Html exposing (..)
@@ -70,13 +66,16 @@ imageSrc =
 
 image : ( String, String ) -> Grid.Column msg
 image ( link, asset ) =
-    Grid.col [ Col.md4, Col.sm12 ]
+    Grid.col [ Col.md4, Col.sm12, Col.attrs [ Attr.style "position" "relative" ] ]
         [ a [ Attr.href link ]
             [ img
                 [ Attr.src asset
                 , Attr.style "display" "block"
                 , Attr.style "margin-left" "auto"
                 , Attr.style "margin-right" "auto"
+                , Attr.style "position" "relative"
+                , Attr.style "top" "50%"
+                , Attr.style "transform" "translateY(-50%)"
                 , Attr.style "width" "80%"
                 , Spacing.mb4
                 ]
