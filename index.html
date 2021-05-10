@@ -1,27 +1,36 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Noah McGivern</title>
+  <head>
+    <title>Noah McGivern</title>
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <!-- Elm -->
-  <script src="main.js"></script>
-</head>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <!-- particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Elm -->
+    <script src="index.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<body style="background-color:#030723;margin:0;">
-  <div id="elm"></div>
-  <script>
-  var app = Elm.Main.init({
-    node: document.getElementById('elm')
-  });
-  </script>
-</body>
+  <body>
+    <div id="elm"></div>
+    <div id="particles"></div>
+    <script>
+      let app = Elm.Main.init({
+        node: document.getElementById("elm"),
+      });
+
+      particlesJS.load("particles", "assets/config.json");
+    </script>
+  </body>
 </html>

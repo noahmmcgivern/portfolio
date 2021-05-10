@@ -1,6 +1,6 @@
 \#*#
 *~
 
-elm-stuff/
-node_modules/
-out/
+elm-stuff
+node_modules
+out

@@ -1,0 +1,18 @@
+body {
+  background-color: #030723 !important;
+  margin: 0;
+}
+
+.fab {
+  transform: scale(5);
+}
+
+#particles {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  overflow: hidden;
+}

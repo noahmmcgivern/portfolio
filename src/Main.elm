@@ -11,7 +11,7 @@ import Bootstrap.Grid as Grid
 import Bootstrap.Grid.Col as Col
 import Bootstrap.Utilities.Spacing as Spacing
 import Browser
-import FontAwesome exposing (aws, cubes, docker, draftingCompass, icon, userShield)
+import FontAwesome exposing (aws, cubes, docker, draftingCompass, gitHub, linkedIn, icon)
 import Html exposing (..)
 import Html.Attributes as Attr
 
@@ -20,39 +20,13 @@ import Html.Attributes as Attr
 -- MAIN
 
 
-main : Program () Model Msg
+main : Program () {} msg
 main =
     Browser.sandbox
-        { view = view
-        , update = update
-        , init = init
+        { init = {}
+        , view = view
+        , update = \_ _ -> {}
         }
-
-
-
--- MODEL
-
-
-type alias Model =
-    ()
-
-
-init : Model
-init =
-    ()
-
-
-
--- UPDATE
-
-
-type Msg
-    = Action
-
-
-update : Msg -> Model -> Model
-update msg model =
-    model
 
 
 
@@ -61,19 +35,32 @@ update msg model =
 
 descriptionSrc : List ( FontAwesome.Icon, String, List (Html msg) )
 descriptionSrc =
-    [ ( draftingCompass, "Front-end", Asset.descFrontend )
-    , ( cubes, "Back-end", Asset.descBackend )
-    , ( docker, "Systems", Asset.descSystems )
+    [ ( draftingCompass, "Front End", Asset.descFrontend )
+    , ( cubes, "Back End", Asset.descBackend )
     , ( aws, "Cloud", Asset.descCloud )
-    , ( userShield, "Security", Asset.descSecurity )
+    , ( docker, "Systems", Asset.descSystems )
     ]
 
 
-imageSrc : List ( String, String )
+imageSrc : List ( FontAwesome.Icon, String )
 imageSrc =
-    [ ( "https://www.linkedin.com/in/noah-mcgivern/", Asset.linkedIn )
-    , ( "https://elm-lang.org/", Asset.elm )
-    , ( "https://github.com/noahmmcgivern", Asset.octocat )
+    [ ( linkedIn, "https://www.linkedin.com/in/noah-mcgivern/" )
+    , ( gitHub, "https://github.com/noahmmcgivern" )
+    ]
+
+
+logo : List (Grid.Column msg)
+logo =
+    [ Grid.col [ Col.md12 ]
+            [ img
+                [ Attr.src Asset.logo
+                , Attr.style "display" "block"
+                , Attr.style "margin" "0 auto"
+                , Attr.style "maxWidth" "300px"
+                , Attr.style "pointer-events" "none"
+                ]
+                []
+            ]
     ]
 
 
@@ -91,58 +78,29 @@ description ( faicon, title, desc ) =
         ]
 
 
-image : ( String, String ) -> Grid.Column msg
-image ( link, asset ) =
+image : ( FontAwesome.Icon, String ) -> Grid.Column msg
+image ( faicon, link ) =
     Grid.col
-        [ Col.md4
+        [ Col.md6
         , Col.sm12
-        , Col.attrs
-            [ Attr.style "position" "relative"
-            , Attr.style "background-color" "white"
-            , Attr.style "border-radius" "10%"
-            , Attr.style "margin-bottom" "15px"
-            ]
+        , Col.attrs [ Attr.style "text-align" "center" ]
         ]
-        [ a [ Attr.href link ]
-            [ img
-                [ Attr.src asset
-                , Attr.style "display" "block"
-                , Attr.style "margin-left" "auto"
-                , Attr.style "margin-right" "auto"
-                , Attr.style "position" "relative"
-                , Attr.style "top" "50%"
-                , Attr.style "transform" "translateY(-50%)"
-                , Attr.style "width" "80%"
-                , Spacing.mb4
-                ]
-                []
+        [ a
+            [ Attr.href link
+            , Attr.style "color" "white"
+            , Attr.style "display" "inline-block"
+            , Attr.style "margin-bottom" "30px"
+            , Attr.style "margin-top" "30px"
             ]
+            [ icon faicon ]
         ]
 
 
-logo : List (Grid.Column msg)
-logo =
-    [ Grid.col [ Col.md12 ]
-        [ a [ Attr.href "#" ]
-            [ img
-                [ Attr.src Asset.logo
-                , Attr.style "display" "block"
-                , Attr.style "margin-left" "auto"
-                , Attr.style "margin-right" "auto"
-                , Attr.style "width" "500px"
-                , Attr.style "maxWidth" "100%"
-                ]
-                []
-            ]
-        ]
-    ]
-
-
-view : Model -> Html Msg
+view : model -> Html msg
 view _ =
     Grid.container []
-        [ CDN.stylesheet -- creates an inline style node with the Bootstrap CSS
+        [ CDN.stylesheet
         , Grid.row [] <| logo
-        , Grid.row [] <| List.map description descriptionSrc
         , Grid.row [] <| List.map image imageSrc
+        --, Grid.row [] <| List.map description descriptionSrc
         ]
